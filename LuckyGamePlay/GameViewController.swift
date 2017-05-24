@@ -16,6 +16,11 @@ import GameplayKit
     var swiftris:Swiftris!
     //tracking the last point on the screen at whicht a shape movement occurred or where a pan begins
     var panPointRefernece:CGPoint?
+    
+    @IBOutlet weak var scoreLabel: UILabel!
+    
+    @IBOutlet weak var levelLabel: UILabel!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,13 +51,13 @@ import GameplayKit
     }
     
     //function allows each gesture recognizer to work in tandem with the others
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
     
     // #6 function for case if swiping down a pan gesture may occur simultaneously with a swipe gesture
     //is conditionals check whether the generic UIGestureRecognizer parameters is of hte specific types of recognizers we expect to see
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailByGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer is UISwipeGestureRecognizer {
             if otherGestureRecognizer is UIPanGestureRecognizer {
                 return true
@@ -112,6 +117,11 @@ import GameplayKit
     }
     
     func gameDidBegin(swiftris: Swiftris) {
+        
+        levelLabel.text = "\(swiftris.level)"
+        scoreLabel.text = "\(swiftris.score)"
+        scene.tickLengthMillis = TickLengthLevelOne
+        
         // The following is false when restarting a new game
         if swiftris.nextShape != nil && swiftris.nextShape!.blocks[0].sprite == nil {
             scene.addPreviewShapeToScene(shape: swiftris.nextShape!) {
@@ -125,10 +135,21 @@ import GameplayKit
     func gameDidEnd(swiftris: Swiftris) {
         view.isUserInteractionEnabled = false
         scene.stopTicking()
+        scene.playSound(sound: "Sounds/gameover.mp3")
+        scene.animateCollapsingLines(linesToRemove: swiftris.removeAllBlocks(), fallenBlocks: swiftris.removeAllBlocks()) {
+            swiftris.beginGame()
+        }
+        
     }
     
     func gameDidLevelUp(swiftris: Swiftris) {
-        
+        levelLabel.text = "\(swiftris.level)"
+        if scene.tickLengthMillis >= 100 {
+            scene.tickLengthMillis -= 100
+        } else if scene.tickLengthMillis > 50 {
+            scene.tickLengthMillis -= 50
+        }
+        scene.playSound(sound: "Sounds/levelup.mp3")
     }
     
     //redraw the shape at its new location and then let it drop
@@ -141,7 +162,21 @@ import GameplayKit
     
     func gameShapeDidLand(swiftris: Swiftris) {
         scene.stopTicking()
-        nextShape()
+        self.view.isUserInteractionEnabled = false
+        // #10 are there any completed lines? if so, remove them
+        let removedLines = swiftris.removeCompletedLines()
+        if removedLines.linesRemoved.count > 0 {
+            self.scoreLabel.text = "\(swiftris.score)"
+            scene.animateCollapsingLines(linesToRemove: removedLines.linesRemoved, fallenBlocks:removedLines.fallenBlocks) {
+                // #11 after the blocks have fallen to their new location, they may have formed brand new lines. gameShapeDidLand invokes itself= recursion, it detects any new lines
+                self.gameShapeDidLand(swiftris: swiftris)
+            }
+            scene.playSound(sound: "Sounds/bomb.mp3")
+        } else {
+            nextShape()
+        }
+    
+    
     }
     
     // #17 after a shape has being moved, its representative sprites must be redrawn at their new locations
