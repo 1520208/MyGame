@@ -11,12 +11,6 @@ import SpriteKit
 //the number of total shape varieties
 let NumOrientations: UInt32 = 4
 
-//shape indexes
-
-let FirstBlockIdx = 0
-let SecondBlockIdx = 1
-let ThirdBlockIdx = 2
-let FourthBlockIdx = 3
 
 enum Orientation: Int, CustomStringConvertible{
     
@@ -57,6 +51,16 @@ enum Orientation: Int, CustomStringConvertible{
         }
         
     }
+
+
+    // The number of total shape varieties
+    let NumShapeTypes: UInt32 = 7
+
+    // Shape indexes
+    let FirstBlockIdx: Int = 0
+    let SecondBlockIdx: Int = 1
+    let ThirdBlockIdx: Int = 2
+    let FourthBlockIdx: Int = 3
 
 class Shape: Hashable, CustomStringConvertible{
     
@@ -163,7 +167,7 @@ class Shape: Hashable, CustomStringConvertible{
     final func moveTo(column:Int, row:Int){
         self.column=column
         self.row=row
-        rotateBlocks(orientation)
+        rotateBlocks(orientation: orientation)
     }
     
     final class func random(startingColumn:Int, startingRow: Int) -> Shape{

@@ -6,6 +6,7 @@
 //  Copyright © 2017 Jackys Code Factory. All rights reserved.
 //
 
+//definition of total number of rows and columns, location where each piece starts and the preview piece belongs
 let NumColumns = 10
 let NumRows = 20
 let StartingColumn = 4
@@ -25,11 +26,15 @@ class Swiftris{
         
     }
     
-    func beginGame(){
-        if (nextShape==nil){
-            nextShape = Shape.random(startingColumn:PreviewColumn, startingRow: <#T##Int#>)
+    func beginGame() {
+        if (nextShape == nil) {
+            nextShape = Shape.random(startingColumn:PreviewColumn, startingRow: PreviewRow)
         }
     }
+    
+    //method which assigns the preview shape as nextShape, fallingShape is the moving Tetromino
+    //method creates a new preview shape before moving fallingShape to the starting row and column
+    //@return tuple of optional Shape objects
     
     func newShape() ->(fallingShape:Shape?, nextShape:Shape?){
         fallingShape = nextShape
