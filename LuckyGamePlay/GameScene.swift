@@ -45,7 +45,7 @@ class GameScene: SKScene {
         addChild(gameLayer)
         
         let gameBoardTexture = SKTexture(imageNamed: "gameboard")
-        let gameBoard = SKSpriteNode(texture: gameBoardTexture, size: CGSizeMake(BlockSize * CGFloat(NumColumns), BlockSize * CGFloat(NumRows)))
+        let gameBoard = SKSpriteNode(texture: gameBoardTexture, size: CGSize(width: BlockSize * CGFloat(NumColumns), height: BlockSize * CGFloat(NumRows)))
         gameBoard.anchorPoint = CGPoint(x:0, y:1.0)
         gameBoard.position = LayerPosition
        
@@ -84,7 +84,7 @@ class GameScene: SKScene {
     func pointForColumn(column: Int, row: Int) -> CGPoint {
         let x = LayerPosition.x + (CGFloat(column) * BlockSize) + (BlockSize / 2)
         let y = LayerPosition.y - ((CGFloat(row) * BlockSize) + (BlockSize / 2))
-        return CGPointMake(x,y)
+        return CGPoint(x: x, y: y)
     }
     
     func addPreviewShapeToScene(shape:Shape, completion:@escaping () -> ()) {

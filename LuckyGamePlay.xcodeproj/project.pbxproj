@@ -235,6 +235,7 @@
 				TargetAttributes = {
 					4FC1D14F1ED40F2600A4E765 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 97K67M84B8;
 						ProvisioningStyle = Automatic;
 					};
 					4FC1D1691ED40F2600A4E765 = {
@@ -470,6 +471,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 97K67M84B8;
 				INFOPLIST_FILE = LuckyGamePlay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jacky-audrey.LuckyGamePlay";
@@ -482,6 +484,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 97K67M84B8;
 				INFOPLIST_FILE = LuckyGamePlay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jacky-audrey.LuckyGamePlay";
@@ -563,6 +566,7 @@
 				4FC1D1801ED40F2600A4E765 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4FC1D1811ED40F2600A4E765 /* Build configuration list for PBXNativeTarget "LuckyGamePlayTests" */ = {
 			isa = XCConfigurationList;
@@ -571,6 +575,7 @@
 				4FC1D1831ED40F2600A4E765 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4FC1D1841ED40F2600A4E765 /* Build configuration list for PBXNativeTarget "LuckyGamePlayUITests" */ = {
 			isa = XCConfigurationList;
@@ -579,6 +584,7 @@
 				4FC1D1861ED40F2600A4E765 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
