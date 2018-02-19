@@ -9,11 +9,14 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import AVFoundation
 
  class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognizerDelegate  {
     
     var scene: GameScene!
     var swiftris:Swiftris!
+     var audioPlayer: AVAudioPlayer = AVAudioPlayer()
+
     //tracking the last point on the screen at whicht a shape movement occurred or where a pan begins
     var panPointRefernece:CGPoint?
     
@@ -30,7 +33,6 @@ import GameplayKit
         skView.isMultipleTouchEnabled = false
         
         //Create and configure the scene
-        
         scene = GameScene (size: skView.bounds.size)
         scene.scaleMode = .aspectFill
         
@@ -43,7 +45,6 @@ import GameplayKit
         //Present the scene
         
         skView.presentScene(scene)
-    
     }
 
     override var prefersStatusBarHidden: Bool {
@@ -54,6 +55,7 @@ import GameplayKit
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
+    
     
     // #6 function for case if swiping down a pan gesture may occur simultaneously with a swipe gesture
     //is conditionals check whether the generic UIGestureRecognizer parameters is of hte specific types of recognizers we expect to see
@@ -117,11 +119,14 @@ import GameplayKit
     }
     
     func gameDidBegin(swiftris: Swiftris) {
-        
         levelLabel.text = "\(swiftris.level)"
         scoreLabel.text = "\(swiftris.score)"
         scene.tickLengthMillis = TickLengthLevelOne
-        
+        if swiftris.level == 1 {
+            playSound(sound: "/Users/jacquelinefranssen/Desktop/MyGame/Blocs/Sounds/first.mp3")
+        }else {
+            stop(sound: "/Users/jacquelinefranssen/Desktop/MyGame/Blocs/Sounds/first.mp3")
+        }
         // The following is false when restarting a new game
         if swiftris.nextShape != nil && swiftris.nextShape!.blocks[0].sprite == nil {
             scene.addPreviewShapeToScene(shape: swiftris.nextShape!) {
@@ -144,12 +149,44 @@ import GameplayKit
     
     func gameDidLevelUp(swiftris: Swiftris) {
         levelLabel.text = "\(swiftris.level)"
-        if scene.tickLengthMillis >= 100 {
-            scene.tickLengthMillis -= 100
-        } else if scene.tickLengthMillis > 50 {
-            scene.tickLengthMillis -= 50
+        if scene.tickLengthMillis >= 50 {
+            scene.tickLengthMillis -= 20
+        } else if scene.tickLengthMillis > 20 {
+            scene.tickLengthMillis -= 30
         }
+       
         scene.playSound(sound: "Sounds/levelup.mp3")
+        if swiftris.level == 2 {
+            playSound(sound: "/Users/jacquelinefranssen/Desktop/MyGame/Blocs/Sounds/first.mp3")
+        }else {
+            stop(sound: "Sounds/first.mp3")
+        }
+        if swiftris.level == 3 {
+            playSound(sound: "Sounds/third.mp3")
+        }else {
+            stop(sound: "Sounds/third.mp3")
+        }
+        if swiftris.level == 4 {
+            playSound(sound: "Sounds/fourth.mp3")
+        }else {
+            stop(sound: "Sounds/fourth.mp3")
+        }
+    }
+    
+    func playSound(sound:String) {
+        audioPlayer.play()
+        var path = Bundle.main.path(forResource: sound, ofType: "mp3", inDirectory: "Sounds")
+        var player = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: path!))
+        var player.prepareToPlay()
+        audioPlayer.play()
+        
+        //run(SKAction.playSoundFileNamed(sound, waitForCompletion: false))
+    }
+    
+    func stop(sound:String) {
+        audioPlayer.stop()
+        print(audioPlayer.currentTime)
+        audioPlayer.currentTime = 0
     }
     
     //redraw the shape at its new location and then let it drop

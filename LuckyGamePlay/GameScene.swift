@@ -5,9 +5,10 @@
 //  Created by Jacqueline on 23.05.17.
 //  Copyright © 2017 Jackys Code Factory. All rights reserved.
 //
-
 import SpriteKit
 import GameplayKit
+import AVFoundation
+
 
 let BlockSize:CGFloat=20.0
 
@@ -20,11 +21,11 @@ class GameScene: SKScene {
     let shapeLayer = SKNode()
     let LayerPosition = CGPoint(x: 6, y: -6)
     
-//#2 Variable tickLengthMillis is the curent length of GameScene, lastTick is the last experienced tick
-
+    //#2 Variable tickLengthMillis is the curent length of GameScene, lastTick is the last experienced tick
     var tick:(() -> ())?
     var tickLengthMillis = TickLengthLevelOne
     var lastTick:NSDate?
+    var player: AVAudioPlayer?
     
     var textureCache = Dictionary<String,SKTexture>()
     
@@ -48,25 +49,28 @@ class GameScene: SKScene {
         let gameBoard = SKSpriteNode(texture: gameBoardTexture, size: CGSize(width: BlockSize * CGFloat(NumColumns), height: BlockSize * CGFloat(NumRows)))
         gameBoard.anchorPoint = CGPoint(x:0, y:1.0)
         gameBoard.position = LayerPosition
-       
+        
         shapeLayer.position = LayerPosition
         shapeLayer.addChild(gameBoard)
         gameLayer.addChild(shapeLayer)
         
+        
+        
         //set up a looping sound playback action of the theme song
-        run(SKAction.repeatForever(SKAction.playSoundFileNamed("Sounds/theme.mp3", waitForCompletion: true)))
+//        run(SKAction.repeatForever(SKAction.playSoundFileNamed("Sounds/first.mp3", waitForCompletion: true)))
     }
     
-    //
     func playSound(sound:String) {
         run(SKAction.playSoundFileNamed(sound, waitForCompletion: false))
     }
+   
+    
     
     override func update(_ currentTime: CFTimeInterval) {
         // Called before each frame is rendered
         
         
-       //#3 guard checks the conditions which follow in Swift
+        //#3 guard checks the conditions which follow in Swift
         guard let lastTick = lastTick else{
             return
         }
@@ -197,6 +201,6 @@ class GameScene: SKScene {
         // #7
         run(SKAction.wait(forDuration: longestDuration), completion:completion)
     }
-
+    
     
 }

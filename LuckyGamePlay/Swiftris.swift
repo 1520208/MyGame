@@ -7,14 +7,14 @@
 //
 
 //definition of total number of rows and columns, location where each piece starts and the preview piece belongs
-let NumColumns = 10
+let NumColumns = 15
 let NumRows = 20
-let StartingColumn = 4
+let StartingColumn = 7
 let StartingRow = 0
-let PreviewColumn = 12
-let PreviewRow = 1
+let PreviewColumn = 11
+let PreviewRow = 22
 let PointsPerLine = 10
-let LevelThreshold = 500
+let LevelThreshold = 100
 
 
 protocol SwiftrisDelegate {
@@ -43,7 +43,7 @@ class Swiftris{
     var fallingShape:Shape?
     var delegate:SwiftrisDelegate?
     var score = 0 //cumulative point total
-    var level = 1 //which level of Swiftris is being played
+    var level = 1
     
     init(){
         fallingShape = nil

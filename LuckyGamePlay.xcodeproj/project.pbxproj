@@ -27,6 +27,7 @@
 		4FC1D1A01ED4638800A4E765 /* SShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC1D19F1ED4638800A4E765 /* SShape.swift */; };
 		4FC1D1A21ED463C800A4E765 /* ZShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC1D1A11ED463C800A4E765 /* ZShape.swift */; };
 		4FC1D1A41ED4678000A4E765 /* Swiftris.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC1D1A31ED4678000A4E765 /* Swiftris.swift */; };
+		783A9805202DAE690080D271 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 783A9804202DAE690080D271 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		4FC1D19F1ED4638800A4E765 /* SShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SShape.swift; sourceTree = "<group>"; };
 		4FC1D1A11ED463C800A4E765 /* ZShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZShape.swift; sourceTree = "<group>"; };
 		4FC1D1A31ED4678000A4E765 /* Swiftris.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swiftris.swift; sourceTree = "<group>"; };
+		783A9804202DAE690080D271 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				783A9805202DAE690080D271 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +112,7 @@
 				4FC1D1511ED40F2600A4E765 /* Products */,
 				4F2AC3381ED5BC9300D15F14 /* Sounds */,
 				4FC1D18D1ED41A4800A4E765 /* Blocs */,
+				783A9803202DAE680080D271 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,6 +166,14 @@
 				4FC1D17B1ED40F2600A4E765 /* Info.plist */,
 			);
 			path = LuckyGamePlayUITests;
+			sourceTree = "<group>";
+		};
+		783A9803202DAE680080D271 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				783A9804202DAE690080D271 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,15 +245,18 @@
 					4FC1D14F1ED40F2600A4E765 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 97K67M84B8;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					4FC1D1691ED40F2600A4E765 = {
 						CreatedOnToolsVersion = 8.3.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 4FC1D14F1ED40F2600A4E765;
 					};
 					4FC1D1741ED40F2600A4E765 = {
 						CreatedOnToolsVersion = 8.3.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 4FC1D14F1ED40F2600A4E765;
 					};
@@ -464,7 +479,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jacky-audrey.LuckyGamePlay";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -477,7 +493,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jacky-audrey.LuckyGamePlay";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -490,7 +507,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jacky-audrey.LuckyGamePlayTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LuckyGamePlay.app/LuckyGamePlay";
 			};
 			name = Debug;
@@ -504,7 +522,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jacky-audrey.LuckyGamePlayTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LuckyGamePlay.app/LuckyGamePlay";
 			};
 			name = Release;
@@ -517,7 +536,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jacky-audrey.LuckyGamePlayUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = LuckyGamePlay;
 			};
 			name = Debug;
@@ -530,7 +550,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jacky-audrey.LuckyGamePlayUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = LuckyGamePlay;
 			};
 			name = Release;
