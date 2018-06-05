@@ -53,11 +53,8 @@ class GameScene: SKScene {
         shapeLayer.position = LayerPosition
         shapeLayer.addChild(gameBoard)
         gameLayer.addChild(shapeLayer)
-        
-        
-        
         //set up a looping sound playback action of the theme song
-//        run(SKAction.repeatForever(SKAction.playSoundFileNamed("Sounds/first.mp3", waitForCompletion: true)))
+        run(SKAction.repeatForever(SKAction.playSoundFileNamed("Sounds/first.mp3", waitForCompletion: true)))
     }
     
     func playSound(sound:String) {
