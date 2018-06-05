@@ -10,6 +10,9 @@ import UIKit
 import SpriteKit
 import GameplayKit
 import AVFoundation
+import AVFoundation
+
+var player: AVAudioPlayer?
 
  class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognizerDelegate  {
     
@@ -17,6 +20,29 @@ import AVFoundation
     var swiftris:Swiftris!
      var audioPlayer: AVAudioPlayer = AVAudioPlayer()
 
+    func playSound() {
+        guard let url = Bundle.main.url(forResource: "soundName", withExtension: "mp3") else { return }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            
+            
+            /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
+            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            
+            /* iOS 10 and earlier require the following line:
+             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
+            
+            guard let player = player else { return }
+            
+            player.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
     //tracking the last point on the screen at whicht a shape movement occurred or where a pan begins
     var panPointRefernece:CGPoint?
     
@@ -122,11 +148,11 @@ import AVFoundation
         levelLabel.text = "\(swiftris.level)"
         scoreLabel.text = "\(swiftris.score)"
         scene.tickLengthMillis = TickLengthLevelOne
-        if swiftris.level == 1 {
-            playSound(sound: "/Users/jacquelinefranssen/Desktop/MyGame/Blocs/Sounds/first.mp3")
-        }else {
-            stop(sound: "/Users/jacquelinefranssen/Desktop/MyGame/Blocs/Sounds/first.mp3")
-        }
+//        if swiftris.level == 1 {
+//            playSound(sound: "/Users/jacquelinefranssen/Desktop/MyGame/Blocs/Sounds/first.mp3")
+//        }else {
+//            stop(sound: "/Users/jacquelinefranssen/Desktop/MyGame/Blocs/Sounds/first.mp3")
+//        }
         // The following is false when restarting a new game
         if swiftris.nextShape != nil && swiftris.nextShape!.blocks[0].sprite == nil {
             scene.addPreviewShapeToScene(shape: swiftris.nextShape!) {
@@ -155,40 +181,40 @@ import AVFoundation
             scene.tickLengthMillis -= 30
         }
        
-        scene.playSound(sound: "Sounds/levelup.mp3")
-        if swiftris.level == 2 {
-            playSound(sound: "/Users/jacquelinefranssen/Desktop/MyGame/Blocs/Sounds/first.mp3")
-        }else {
-            stop(sound: "Sounds/first.mp3")
-        }
-        if swiftris.level == 3 {
-            playSound(sound: "Sounds/third.mp3")
-        }else {
-            stop(sound: "Sounds/third.mp3")
-        }
-        if swiftris.level == 4 {
-            playSound(sound: "Sounds/fourth.mp3")
-        }else {
-            stop(sound: "Sounds/fourth.mp3")
-        }
+//        scene.playSound(sound: "Sounds/levelup.mp3")
+//        if swiftris.level == 2 {
+//            playSound(sound: "/Users/jacquelinefranssen/Desktop/MyGame/Blocs/Sounds/first.mp3")
+//        }else {
+//            stop(sound: "Sounds/first.mp3")
+//        }
+//        if swiftris.level == 3 {
+//            playSound(sound: "Sounds/third.mp3")
+//        }else {
+//            stop(sound: "Sounds/third.mp3")
+//        }
+//        if swiftris.level == 4 {
+//            playSound(sound: "Sounds/fourth.mp3")
+//        }else {
+//            stop(sound: "Sounds/fourth.mp3")
+//        }
     }
     
-    func playSound(sound:String) {
-        audioPlayer.play()
-        var path = Bundle.main.path(forResource: sound, ofType: "mp3", inDirectory: "Sounds")
-        var player = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: path!))
-        var player.prepareToPlay()
-        audioPlayer.play()
-        
-        //run(SKAction.playSoundFileNamed(sound, waitForCompletion: false))
-    }
+//    func playSound(sound:String) {
+//        audioPlayer.play()
+//        var path = Bundle.main.path(forResource: sound, ofType: "mp3", inDirectory: "Sounds")
+//        var player = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: path!))
+//        var player.prepareToPlay()
+//        audioPlayer.play()
+//
+//        //run(SKAction.playSoundFileNamed(sound, waitForCompletion: false))
+//    }
     
-    func stop(sound:String) {
-        audioPlayer.stop()
-        print(audioPlayer.currentTime)
-        audioPlayer.currentTime = 0
-    }
-    
+//    func stop(sound:String) {
+//        audioPlayer.stop()
+//        print(audioPlayer.currentTime)
+//        audioPlayer.currentTime = 0
+//    }
+//
     //redraw the shape at its new location and then let it drop
     func gameShapeDidDrop(swiftris: Swiftris) {
         scene.stopTicking()
